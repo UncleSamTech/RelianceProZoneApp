@@ -58,6 +58,13 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 }
             }));
 
+            getFab(R.id.fab_add_provider).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(c, RelianceProZoneAddNewProvider.class));
+                }
+            });
+
             popProvList();
         } catch (Exception e) {
             Toast.makeText(c, " Error as a result of " + e.getLocalizedMessage(),RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();

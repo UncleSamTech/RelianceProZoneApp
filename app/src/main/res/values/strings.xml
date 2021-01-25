@@ -4,4 +4,11 @@
     <string name="add_providers_full_name">Add Providers Full Name</string>
     <string name="add_providers_descr">Add Providers Description</string>
     <string name="add_providers_address">Add Providers Address</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="samuel_iwuchukwu">Samuel Iwuchukwu</string>
+    <string name="gymn_provider">Gymn Provider</string>
+    <string name="ibadan_nigeria">Ibadan Nigeria</string>
+    <string name="act_lab">Active</string>
+    <string name="five_rate">5 rating</string>
+    <string name="riv_stat">Rivers State</string>
 </resources>
