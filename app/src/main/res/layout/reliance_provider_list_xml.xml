@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="2dp"
+        android:padding="2dp"
+        app:cardElevation="6dp"
+        android:id="@+id/card_view_providlists"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/provlist_loggo"
+            android:layout_width="match_parent"
+            tools:src= "@mipmap/reliance_loggo_foreground"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:padding="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="2dp"
+            android:layout_below="@id/provlist_loggo"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_margin="3dp"
+                android:id="@+id/prov_name"
+                android:layout_weight="2"
+                android:fontFamily="@font/fauna_one"
+                android:drawableStart="@drawable/ic_person_icon"
+                android:drawablePadding="3dp"
+                tools:text="Ayomide Ogun" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_margin="3dp"
+                android:layout_weight="2"
+                android:id="@+id/prov_loc"
+                android:fontFamily="@font/fauna_one"
+                android:drawableStart="@drawable/ic_location_icon"
+                android:drawablePadding="3dp"
+                tools:text="Lagos, Nigeria" />
+        </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
