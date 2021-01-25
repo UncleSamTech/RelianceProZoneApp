@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RelianceProZoneApp</string>
+    <string name="register_new_provider">Register new Provider</string>
+    <string name="add_providers_full_name">Add Providers Full Name</string>
+    <string name="add_providers_descr">Add Providers Description</string>
+    <string name="add_providers_address">Add Providers Address</string>
 </resources>

@@ -14,6 +14,7 @@ Context c =  MainActivity.this;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadRelianceSplash();
     }
 
     private void loadRelianceSplash(){

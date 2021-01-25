@@ -11,7 +11,7 @@
     android:id="@+id/cons_pro_zone_details"
     tools:context=".RelianceProZoneProviderDetails">
 
-    
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

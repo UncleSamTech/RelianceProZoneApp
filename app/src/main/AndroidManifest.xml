@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.reliancehmotest.prozoneapp">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/reliance_loggo"
@@ -9,7 +13,8 @@
         android:roundIcon="@mipmap/reliance_loggo"
         android:supportsRtl="true"
         android:theme="@style/Theme.RelianceProZoneApp">
-        <activity android:name=".RelianceProZoneProviderDetails"></activity>
+        <activity android:name=".RelianceProZoneAddNewProvider"></activity>
+        <activity android:name=".RelianceProZoneProviderDetails" />
         <activity android:name=".RelianceProZoneAppProviderActivity" />
         <activity
             android:name=".MainActivity"
