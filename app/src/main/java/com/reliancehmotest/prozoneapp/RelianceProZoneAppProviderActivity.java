@@ -13,6 +13,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +30,9 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
     private ArrayList<RelianceProZoneAppModelClass> relianceProZoneAppModelClassArrayList;
     private RelianceProZoneAppModelClass relianceProZoneAppModelClass;
     private RelianceAppProZoneListProvidersAdapter relianceAppProZoneListProvidersAdapter;
+    private String selCrit;
+    private String onBoardStVal;
+    private String provTypeVal;
 
 
     @Override
@@ -65,6 +71,8 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 }
             });
 
+            popSearchCriteria();
+
             popProvList();
         } catch (Exception e) {
             Toast.makeText(c, " Error as a result of " + e.getLocalizedMessage(),RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
@@ -91,6 +99,105 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
     private FloatingActionButton getFab(int id){
         return findViewById(id);
     }
+
+    private Spinner getSpin(int id){
+        return findViewById(id);
+    }
+
+    /**
+     * This method is used for returning arrayAdapter
+     *
+     * @param arr_cont_id
+     * @param lay_id
+     * @param dropId
+     * @return
+     */
+    private ArrayAdapter getArrayAdapter(Context c, int arr_cont_id, int lay_id, int dropId) {
+        ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(c, arr_cont_id, lay_id);
+        arrayAdapter.setDropDownViewResource(dropId);
+        return arrayAdapter;
+    }
+
+
+
+
+    private void popSearchCriteria(){
+        ArrayAdapter arrAd = getArrayAdapter(this, R.array.search_provid_type, android.R.layout.simple_spinner_item, android.R.layout.simple_dropdown_item_1line);
+        Spinner relSpin = getSpin(R.id.spin_filter_options);
+        relSpin.setAdapter(arrAd);
+        relSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    selCrit = (String) parent.getItemAtPosition(position);
+                    if(selCrit.equals("Search By Provider Type")){
+                        setProvType();
+                    }
+                    else if(selCrit.equals("Search By OnBoarding Status")){
+                        setOnBoardStatus();
+                    }
+
+                    else{
+                        Toast.makeText(c,"No valid selection made", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
+                    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private String retFilterType(){
+        return selCrit;
+    }
+
+
+
+
+    private void setOnBoardStatus(){
+        ArrayAdapter arrAd = getArrayAdapter(this, R.array.onb_stat_values, android.R.layout.simple_spinner_item, android.R.layout.simple_dropdown_item_1line);
+        Spinner relSpin = getSpin(R.id.spin_filter_options_values);
+        relSpin.setAdapter(arrAd);
+        relSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onBoardStVal = (String) parent.getItemAtPosition(position);
+                if(onBoardStVal.equals("---Select Registration Status---")){
+                    Toast.makeText(c, " Make a selection ", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setProvType(){
+        ArrayAdapter arrAd = getArrayAdapter(this, R.array.provid_type_val, android.R.layout.simple_spinner_item, android.R.layout.simple_dropdown_item_1line);
+        Spinner relSpin = getSpin(R.id.spin_filter_options_values);
+        relSpin.setAdapter(arrAd);
+        relSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                provTypeVal = (String) parent.getItemAtPosition(position);
+                if(provTypeVal.equals("---Select Provider Type---")){
+                    Toast.makeText(c, " Make a selection ", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
 
 
 

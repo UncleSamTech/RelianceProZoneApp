@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_provid_type">
+        <item>---Select Filter Criteria---</item>
+        <item>Search By Provider Type</item>
+        <item>Search By OnBoarding Status</item>
+    </string-array>
+
+    <string-array name="provid_type_val">
+        <item>---Select Provider Type---</item>
+        <item>Gym</item>
+        <item>Spa</item>
+        <item>Optical Centers</item>
+        <item>Hospital</item>
+    </string-array>
+
+    <string-array name="onb_stat_values">
+        <item>---Select Registration Status---</item>
+        <item>Approved</item>
+        <item>Pending</item>
+        <item>Disabled</item>
+    </string-array>
+</resources>
