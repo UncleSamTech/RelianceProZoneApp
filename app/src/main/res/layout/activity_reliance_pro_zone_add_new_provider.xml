@@ -154,7 +154,7 @@
 
     </LinearLayout>
 
-    <TextView
+   <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -233,15 +233,18 @@
             android:src="@mipmap/reliance_upl_ico_foreground"/>
 
     </LinearLayout>
-
+-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Onboard"
-        android:padding="8dp"
+        android:id="@+id/btn_add_provid"
         android:layout_margin="8dp"
         android:background="@drawable/button_back_color"
-        app:layout_constraintTop_toBottomOf="@id/lin_main2"
+        app:layout_constraintTop_toBottomOf="@id/lin_main1"
+        app:layout_constraintStart_toStartOf="@id/cons_pro_zone_add"
+        app:layout_constraintEnd_toEndOf="@id/cons_pro_zone_add"
+        app:layout_constraintBottom_toBottomOf="@id/cons_pro_zone_add"
         android:textColor="#ffffff"/>
 
 

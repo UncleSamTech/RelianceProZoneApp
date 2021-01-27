@@ -1,14 +1,35 @@
 package com.reliancehmotest.prozoneapp;
 
-public class ReliancePostProvidersModel {
+public class ReliancePostResponseModel {
     public String id;
     public String name;
     public String description;
     public int rating;
-    public String address;
     public String active_status;
     public String provider_type;
     public String state;
+
+    public ReliancePostResponseModel(String id, String name, String description, int rating, String active_status, String provider_type, String state) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.active_status = active_status;
+        this.provider_type = provider_type;
+        this.state = state;
+    }
+
+    public ReliancePostResponseModel(String id, String name, String description, int rating, String active_status, String provider_type) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.active_status = active_status;
+        this.provider_type = provider_type;
+    }
+
+    public ReliancePostResponseModel() {
+    }
 
     public String getId() {
         return id;
@@ -16,30 +37,6 @@ public class ReliancePostProvidersModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public ReliancePostProvidersModel(String name, String description, int rating, String address, String active_status, String provider_type, String state) {
-        this.name = name;
-        this.description = description;
-        this.rating = rating;
-        this.address = address;
-        this.active_status = active_status;
-        this.provider_type = provider_type;
-        this.state = state;
-    }
-
-    public ReliancePostProvidersModel(String id, String name, String description, int rating, String address, String active_status, String provider_type, String state) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.rating = rating;
-        this.address = address;
-        this.active_status = active_status;
-        this.provider_type = provider_type;
-        this.state = state;
-    }
-
-    public ReliancePostProvidersModel() {
     }
 
     public String getName() {
@@ -64,14 +61,6 @@ public class ReliancePostProvidersModel {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getActive_status() {

@@ -34,23 +34,23 @@ public class RelianceAppProZoneListProvidersAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull RelianceAppProZoneViewHolder holder, int position) {
 
         relianceProZoneAppModelClass = relianceProZoneAppModelClassArrayList.get(position);
-        if(!TextUtils.isEmpty(relianceProZoneAppModelClass.getProv_loc())){
-           holder.prov_locat.setText(relianceProZoneAppModelClass.getProv_loc());
+        if(!TextUtils.isEmpty(relianceProZoneAppModelClass.getAddress())){
+           holder.prov_locat.setText(relianceProZoneAppModelClass.getAddress());
         }
         else{
             holder.prov_locat.setText(RelianceAppProZoneConstants.EMPT_VAL);
         }
 
-        if(!TextUtils.isEmpty(relianceProZoneAppModelClass.getProv_name())){
-            holder.prov_name.setText(relianceProZoneAppModelClass.getProv_name());
+        if(!TextUtils.isEmpty(relianceProZoneAppModelClass.getName())){
+            holder.prov_name.setText(relianceProZoneAppModelClass.getName());
         }
 
         else{
             holder.prov_name.setText(RelianceAppProZoneConstants.EMPT_VAL);
         }
 
-        if (!TextUtils.isEmpty(relianceProZoneAppModelClass.getImg_prov())){
-            Glide.with(v).load(relianceProZoneAppModelClass.getImg_prov()).into(holder.prov_img);
+        if (!TextUtils.isEmpty(relianceProZoneAppModelClass.getImages())){
+            Glide.with(v).load(relianceProZoneAppModelClass.getImages()).into(holder.prov_img);
         }
 
         else{
