@@ -193,7 +193,7 @@ private void pushVal(String name, String descript, int rating, String addr, Stri
                     .build();
             RelProviderInterf proInt = retrofit.create(RelProviderInterf.class);
             ReliancePostProvidersModel relPostModel = new ReliancePostProvidersModel(name, descript, rating, addr, act_stat, prov_type, state);
-            Call<ReliancePostProvidersModel> post_call = proInt.createPost(relPostModel);
+            Call<ReliancePostProvidersModel> post_call = proInt.createProvider(relPostModel);
             post_call.enqueue(new Callback<ReliancePostProvidersModel>() {
                 @Override
                 public void onResponse(Call<ReliancePostProvidersModel> call, Response<ReliancePostProvidersModel> response) {
@@ -223,6 +223,7 @@ private void pushVal(String name, String descript, int rating, String addr, Stri
 
                 @Override
                 public void onFailure(Call<ReliancePostProvidersModel> call, Throwable t) {
+                    Toast.makeText(c, "Error as a result of " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
                 }
             });

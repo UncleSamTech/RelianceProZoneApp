@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -236,7 +238,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
     }
 
     private void pullAllProviders(){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://pro-zone.herokuapp.com")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RelProviderInterf jsonApi = retrofit.create(RelProviderInterf.class);
@@ -253,17 +255,95 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
                 for(RelianceProZoneAppModelClass postObjectClass : postActivities){
 
-                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("",postObjectClass.getName(),postObjectClass.getAddress(),postObjectClass.getId()));
+                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","","",0,"","","",""));
                         relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<RelianceProZoneAppModelClass>> call, Throwable t) {
-
+                Toast.makeText(c, "Error as a result of " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+
+
+    private void pullAllProvidersByNameAddress(String name, String addr){
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
+            Map<String, String> genSearch = new HashMap<>();
+            genSearch.put("name", name);
+            genSearch.put("address", addr);
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            RelProviderInterf jsonApi = retrofit.create(RelProviderInterf.class);
+            Call<ArrayList<RelianceProZoneAppModelClass>> pro_call = jsonApi.getProvidersGenericSearch(genSearch);
+            pro_call.enqueue(new Callback<ArrayList<RelianceProZoneAppModelClass>>() {
+                @Override
+                public void onResponse(Call<ArrayList<RelianceProZoneAppModelClass>> call, Response<ArrayList<RelianceProZoneAppModelClass>> response) {
+
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(c, "response unsucessful  and response code : " + response.code(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
+                    for (RelianceProZoneAppModelClass postObjectClass : postActivities) {
+
+                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("", "", "", 0, "", "", "", ""));
+                        relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<RelianceProZoneAppModelClass>> call, Throwable t) {
+                    Toast.makeText(c, "Error as a result of " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            Toast.makeText(c,"Oops! !..No Internet seen ", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
+        }
+
+    }
+
+
+
+    private void pullAllProvidersByTypeStatus(String type, String stat){
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RelProviderInterf jsonApi = retrofit.create(RelProviderInterf.class);
+        Call<ArrayList<RelianceProZoneAppModelClass>>  pro_call = jsonApi.getProvidersByTypeStatus(type,stat);
+        pro_call.enqueue(new Callback<ArrayList<RelianceProZoneAppModelClass>>() {
+            @Override
+            public void onResponse(Call<ArrayList<RelianceProZoneAppModelClass>> call, Response<ArrayList<RelianceProZoneAppModelClass>> response) {
+
+                if(!response.isSuccessful()){
+                    Toast.makeText(c, "response unsucessful  and response code : " + response.code(),Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
+                for(RelianceProZoneAppModelClass postObjectClass : postActivities){
+
+                    relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","","",0,"","","",""));
+                    relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<RelianceProZoneAppModelClass>> call, Throwable t) {
+                Toast.makeText(c, "Error as a result of " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        }
+        else{
+            Toast.makeText(c,"Oops! !..No Internet seen ", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
+        }
     }
 
     private void retrUpdData(String name, String descr, String status, String id, String prov_type, String addr, int rating){
