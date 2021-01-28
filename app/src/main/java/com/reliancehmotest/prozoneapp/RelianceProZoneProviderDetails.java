@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -42,7 +44,14 @@ public class RelianceProZoneProviderDetails extends AppCompatActivity {
             connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             //the NetworkInfo class gets the current state of the device network connection
             networkInfo = connMgr.getActiveNetworkInfo();
-            //setUpProfDetails(name,addr,descr,state,act_status,images,prov_type,getImg(R.id.img_edt_user_prof));
+            setUpProfDetails(name,addr,descr,state,act_status,images,prov_type,getImg(R.id.img_edt_user_prof));
+            getBut(R.id.button_edt_prof).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateProviderData(Integer.parseInt(getTin(R.id.edtProvId).getText().toString().trim()),getTin(R.id.edtProvName).getText().toString().trim(),getTin(R.id.edtProvDescr).getText().toString().trim(),Integer.parseInt(getTin(R.id.edtProfRating).getText().toString().trim()),getTin(R.id.edtProvAddr).getText().toString().trim(),getTin(R.id.edtProvStatus).getText().toString().trim(),getTin(R.id.edtProvType).getText().toString().trim(),getTin(R.id.edtProvState).getText().toString().trim());
+                }
+            });
+
         } catch (Exception e) {
             Toast.makeText(c, "Error as a result of " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
@@ -71,6 +80,7 @@ public class RelianceProZoneProviderDetails extends AppCompatActivity {
 
         else{
             Toast.makeText(c, " Oops missing values " , Toast.LENGTH_LONG).show();
+            getImg(R.id.img_edt_user_prof).setImageResource(R.mipmap.reliance_loggo_foreground);
         }
 
     }
@@ -121,6 +131,14 @@ public class RelianceProZoneProviderDetails extends AppCompatActivity {
         else{
             Toast.makeText(c," Oops no internet seen ", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
         }
+    }
+
+    private Button getBut(int id){
+        return findViewById(id);
+    }
+
+    private TextInputEditText getTin(int id){
+        return findViewById(id);
     }
 
 
