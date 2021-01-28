@@ -6,8 +6,8 @@ public class ReliancePostResponseModel {
     public String description;
     public int rating;
     public String active_status;
-    public String provider_type;
-    public String state;
+    public Object provider_type;
+    public Object state;
 
     public ReliancePostResponseModel(String id, String name, String description, int rating, String active_status, String provider_type, String state) {
         this.id = id;
@@ -71,7 +71,7 @@ public class ReliancePostResponseModel {
         this.active_status = active_status;
     }
 
-    public String getProvider_type() {
+    public Object getProvider_type() {
         return provider_type;
     }
 
@@ -79,7 +79,7 @@ public class ReliancePostResponseModel {
         this.provider_type = provider_type;
     }
 
-    public String getState() {
+    public Object getState() {
         return state;
     }
 

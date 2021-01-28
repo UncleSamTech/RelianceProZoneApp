@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/reliance_loggo"
         android:supportsRtl="true"
         android:theme="@style/Theme.RelianceProZoneApp">
-        <activity android:name=".RelianceProZoneAddNewProvider"></activity>
+        <activity android:name=".RelianceAddProviderImage"></activity>
+        <activity android:name=".RelianceProZoneAddNewProvider" />
         <activity android:name=".RelianceProZoneProviderDetails" />
         <activity android:name=".RelianceProZoneAppProviderActivity" />
         <activity

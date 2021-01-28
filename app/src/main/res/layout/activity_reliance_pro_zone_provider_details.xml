@@ -164,6 +164,23 @@
             android:inputType="text"
             />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtProvId"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:drawableStart="@drawable/ic_location_icon"
+            android:fontFamily="@font/fauna_one"
+            android:layout_weight="4"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:padding="13dp"
+            android:drawablePadding="6dp"
+            android:background="@drawable/edit_text_back"
+            android:layout_margin="6dp"
+            android:hint="24"
+            android:inputType="text"
+            />
+
 
 
         <Button

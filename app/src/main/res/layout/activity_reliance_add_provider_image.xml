@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".RelianceAddProviderImage">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cons_add_img_prof"
+    >
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="@id/cons_add_img_prof"
+        app:layout_constraintTop_toTopOf="@id/cons_add_img_prof"
+        app:layout_constraintEnd_toStartOf="@id/tv_upl_church"
+        android:scaleType="fitCenter"
+        android:id="@+id/img_prov_pics"
+        android:contentDescription="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/reliance_upl_ico_foreground"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="64dp"
+        android:padding="8dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintEnd_toEndOf="@id/cons_add_img_prof"
+        app:layout_constraintStart_toEndOf="@id/img_prov_pics"
+        app:layout_constraintTop_toTopOf="@id/cons_add_img_prof"
+        android:id="@+id/tv_upl_church"
+        android:text="@string/upload_picture_lab"
+        android:fontFamily="@font/fauna_one"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tinp_prov_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/cons_add_img_prof"
+        app:layout_constraintEnd_toEndOf="@id/cons_add_img_prof"
+        app:layout_constraintTop_toBottomOf="@id/img_prov_pics"
+        android:layout_margin="16dp"
+        android:drawableStart="@drawable/ic_person_icon"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/fauna_one"
+        android:hint="@string/add_provider_id_lab"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/cons_add_img_prof"
+        app:layout_constraintTop_toBottomOf="@id/tinp_prov_id"
+        app:layout_constraintEnd_toEndOf="@id/cons_add_img_prof"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_back_color"
+        android:textColor="#ffffff"
+        android:id="@+id/btn_upload_image"
+        android:text="@string/upload_image_lav"
+        android:padding="4dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

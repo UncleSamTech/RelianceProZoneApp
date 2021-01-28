@@ -28,36 +28,6 @@
         android:text="@string/register_new_provider"/>
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        app:layout_constraintStart_toStartOf="@id/cons_pro_zone_add"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reg_prov_lab"
-        app:layout_constraintEnd_toStartOf="@id/tv_upl_church"
-        android:scaleType="fitCenter"
-        android:id="@+id/img_prov_pics"
-        android:contentDescription="@string/app_name"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:src="@mipmap/reliance_upl_ico_foreground"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="64dp"
-        android:padding="8dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintEnd_toEndOf="@id/cons_pro_zone_add"
-        app:layout_constraintStart_toEndOf="@id/img_prov_pics"
-        app:layout_constraintTop_toBottomOf="@id/tv_reg_prov_lab"
-        android:id="@+id/tv_upl_church"
-        android:text="Upload Picture"
-        android:fontFamily="@font/fauna_one"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +38,7 @@
         android:padding="4dp"
         app:layout_constraintStart_toStartOf="@id/cons_pro_zone_add"
         app:layout_constraintEnd_toEndOf="@id/cons_pro_zone_add"
-        app:layout_constraintTop_toBottomOf="@id/img_prov_pics">
+        app:layout_constraintTop_toBottomOf="@id/tv_reg_prov_lab">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/user_full_name"
@@ -113,7 +83,7 @@
             android:layout_margin="4dp"
             android:drawableStart="@drawable/ic_location_icon"
             android:drawablePadding="4dp"
-            android:hint="Add Provider State"
+            android:hint="@string/add_provider_state"
             />
 
         <TextView
@@ -124,7 +94,7 @@
             android:drawablePadding="4dp"
             android:textAlignment="center"
             android:fontFamily="@font/fauna_one"
-            android:hint="Select Provider Type"/>
+            android:hint="@string/select_provider_type_lab"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -142,7 +112,7 @@
             android:drawablePadding="4dp"
             android:fontFamily="@font/fauna_one"
             android:textAlignment="center"
-            android:hint="Select Provider Status"/>
+            android:hint="@string/select_provider_status"/>
 
         <Spinner
             android:layout_width="match_parent"
@@ -237,7 +207,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Onboard"
+        android:text="@string/onboard_lab"
         android:id="@+id/btn_add_provid"
         android:layout_margin="8dp"
         android:background="@drawable/button_back_color"

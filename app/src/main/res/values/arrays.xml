@@ -4,6 +4,7 @@
         <item>---Select Filter Criteria---</item>
         <item>Search By Provider Type</item>
         <item>Search By OnBoarding Status</item>
+        <item>Search By Name</item>
     </string-array>
 
     <string-array name="provid_type_val">

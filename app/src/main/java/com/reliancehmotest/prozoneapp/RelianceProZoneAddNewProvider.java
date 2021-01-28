@@ -33,10 +33,10 @@ public class RelianceProZoneAddNewProvider extends AppCompatActivity {
     private String onBoardStVal;
     private String provTypeVal;
     private Context c = RelianceProZoneAddNewProvider.this;
-    private Uri imgUri;
+
     private NetworkInfo networkInfo;
     private ConnectivityManager connMgr;
-    private String imgPath;
+
 
 
     @Override
@@ -46,18 +46,14 @@ public class RelianceProZoneAddNewProvider extends AppCompatActivity {
         try {
             setOnBoardStatus();
             setProvType();
-            getImg(R.id.img_prov_pics).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getLocalImgPath();
-                }
-            });
+
 
             getBut(R.id.btn_add_provid).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    pushVal(getTInpEdt(R.id.edtProvName).getText().toString().trim(),getTInpEdt(R.id.edtProvDescr).getText().toString().trim(),Integer.parseInt(getTInpEdt(R.id.edtProfRating).getText().toString().trim()),getTInpEdt(R.id.edtProvAddr).getText().toString().trim(),retOnbStat(),retProvType(),getTInpEdt(R.id.edtProvState).getText().toString().trim());
+                    //pushVal(getTInpEdt(R.id.edtProvName).getText().toString().trim(),getTInpEdt(R.id.edtProvDescr).getText().toString().trim(),Integer.parseInt(getTInpEdt(R.id.edtProfRating).getText().toString().trim()),getTInpEdt(R.id.edtProvAddr).getText().toString().trim(),retOnbStat(),retProvType(),getTInpEdt(R.id.edtProvState).getText().toString().trim());
+                    pushVal("David","Gymn",1,"enugu road","Pending","Gym","Abia State");
                 }
             });
 
@@ -148,47 +144,13 @@ public class RelianceProZoneAddNewProvider extends AppCompatActivity {
     }
 
 
-    public void getLocalImgPath() {
-        try {
-            Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-            galleryIntent.setType("image/*");
-            startActivityForResult(galleryIntent, RelianceAppProZoneConstants.GALLERY_REQUEST_CODE);
-
-
-        } catch (NullPointerException np) {
-            Toast.makeText(c, "Error as a result of : " + np.getLocalizedMessage(), RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
-        }
-
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RelianceAppProZoneConstants.GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
-            try {
-                imgUri = data.getData();
-                imgPath = data.getDataString();
-                Glide.with(c).load(imgUri).into(getImg(R.id.img_edt_user_prof));
-            } catch (NullPointerException np) {
-                Toast.makeText(c, "Error as a result of : " + np.getLocalizedMessage(), RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
-            }
-        }
-    }
-
-
-
-    public Uri getImgUri(){
-        Uri uri = imgUri;
-        return uri;}
 
 
 
 private void pushVal(String name, String descript, int rating, String addr, String act_stat, String prov_type, String state){
     if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(descript) && !TextUtils.isEmpty(addr) && !TextUtils.isEmpty(act_stat) && !TextUtils.isEmpty(prov_type) && !TextUtils.isEmpty(state)) {
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("https://pro-zone.herokuapp.com")
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             RelProviderInterf proInt = retrofit.create(RelProviderInterf.class);
@@ -201,22 +163,24 @@ private void pushVal(String name, String descript, int rating, String addr, Stri
                         Toast.makeText(c, " Error as a result of " + response.code(), RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
                     }
 
-                    ReliancePostProvidersModel reliancePostProvidersModel = response.body();
+                    Toast.makeText(c, " Upload successful ", Toast.LENGTH_LONG).show();
+
+                    /*ReliancePostProvidersModel reliancePostProvidersModel = response.body();
                     String name = reliancePostProvidersModel.getName();
                     String descr = reliancePostProvidersModel.getDescription();
                     String status = reliancePostProvidersModel.getActive_status();
                     String addr = reliancePostProvidersModel.getAddress();
-                    String id = reliancePostProvidersModel.getId();
+                    int id = reliancePostProvidersModel.getId();
                     int rating = reliancePostProvidersModel.getRating();
-                    String prov_type = reliancePostProvidersModel.getProvider_type();
+                    String prov_type = (String)reliancePostProvidersModel.getProvider_type();
                     pushUserVal(name, "provid_pref_name", MODE_PRIVATE, "provid_pref_name_key");
                     pushUserVal(descr, "provid_pref_descr", MODE_PRIVATE, "provid_pref_descr_key");
                     pushUserVal(status, "provid_pref_status", MODE_PRIVATE, "provid_pref_status_key");
-                    pushUserVal(id, "provid_pref_id", MODE_PRIVATE, "provid_pref_id_key");
+                    pushUserValInt(id, "provid_pref_id", MODE_PRIVATE, "provid_pref_id_key");
                     pushUserVal(prov_type, "provid_pref_prov_type", MODE_PRIVATE, "provid_pref_prov_type_key");
                     pushUserVal(addr, "provid_pref_addr", MODE_PRIVATE, "provid_pref_descr_addr");
-                    pushUserValInt(rating, "provid_pref_rating", MODE_PRIVATE, "provid_pref_rating_key");
-                    startActivity(new Intent(c, RelianceProZoneAppProviderActivity.class));
+                    pushUserValInt(rating, "provid_pref_rating", MODE_PRIVATE, "provid_pref_rating_key");*/
+                    //startActivity(new Intent(c, RelianceProZoneAppProviderActivity.class));
 
 
                 }

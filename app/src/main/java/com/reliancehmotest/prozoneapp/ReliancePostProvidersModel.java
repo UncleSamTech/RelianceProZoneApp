@@ -1,7 +1,7 @@
 package com.reliancehmotest.prozoneapp;
 
 public class ReliancePostProvidersModel {
-    public String id;
+    public int id;
     public String name;
     public String description;
     public int rating;
@@ -9,12 +9,21 @@ public class ReliancePostProvidersModel {
     public String active_status;
     public String provider_type;
     public String state;
+    public String images;
 
-    public String getId() {
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -28,7 +37,7 @@ public class ReliancePostProvidersModel {
         this.state = state;
     }
 
-    public ReliancePostProvidersModel(String id, String name, String description, int rating, String address, String active_status, String provider_type, String state) {
+    public ReliancePostProvidersModel(int id, String name, String description, int rating, String address, String active_status, String provider_type, String state) {
         this.id = id;
         this.name = name;
         this.description = description;

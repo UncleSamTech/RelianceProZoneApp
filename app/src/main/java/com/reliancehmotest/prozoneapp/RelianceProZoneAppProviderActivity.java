@@ -12,14 +12,17 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +54,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reliance_pro_zone_app_provider);
         try {
-            String id = retrVal("provid_pref_id",MODE_PRIVATE,"provid_pref_id_key");
+            int id = retrValInt("provid_pref_id",MODE_PRIVATE,"provid_pref_id_key");
             String name = retrVal("provid_pref_name",MODE_PRIVATE,"provid_pref_name_key");
             String description = retrVal("provid_pref_descr",MODE_PRIVATE,"provid_pref_descr_key");
             int rating = retrValInt("provid_pref_rating",MODE_PRIVATE,"provid_pref_rating_key");
@@ -78,9 +81,10 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                     pushUserVal(relianceProZoneAppModelClass.getDescription(),"prov_prof_pref_descr",MODE_PRIVATE,"prov_prof_pref_descr_key");
                     pushUserVal(relianceProZoneAppModelClass.getActive_status(),"prov_prof_pref_status",MODE_PRIVATE,"prov_prof_pref_status_key");
                     pushUserVal(relianceProZoneAppModelClass.getAddress(),"prov_prof_pref_addr",MODE_PRIVATE,"prov_prof_pref_addr_key");
-                    pushUserVal(relianceProZoneAppModelClass.getProvider_type(),"prov_prof_pref_type",MODE_PRIVATE,"prov_prof_pref_type_key");
-                    pushUserVal(relianceProZoneAppModelClass.getImages(),"prov_prof_pref_img",MODE_PRIVATE,"prov_prof_pref_img_key");
-                    pushUserVal(relianceProZoneAppModelClass.getState(),"prov_prof_pref_state",MODE_PRIVATE,"prov_prof_pref_state_key");
+                    pushUserVal((String)relianceProZoneAppModelClass.getProvider_type(),"prov_prof_pref_type",MODE_PRIVATE,"prov_prof_pref_type_key");
+                   // pushUserVal(relianceProZoneAppModelClass.getImages(),"prov_prof_pref_img",MODE_PRIVATE,"prov_prof_pref_img_key");
+                    pushUserVal((String)relianceProZoneAppModelClass.getState(),"prov_prof_pref_state",MODE_PRIVATE,"prov_prof_pref_state_key");
+                    pushUserValInt(relianceProZoneAppModelClass.getId(),"prov_prof_pref_id",MODE_PRIVATE,"prov_prof_pref_id_key");
 
                     startActivity(new Intent(c, RelianceProZoneProviderDetails.class));
                 }
@@ -99,12 +103,39 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 }
             });
 
+
+            getFab(R.id.fab_add_img).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(c, RelianceAddProviderImage.class));
+                }
+            });
+
             popSearchCriteria();
 
-            popProvList();
+
+            pullAllProviders();
+
+
+            getBut(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!TextUtils.isEmpty(getEdt(R.id.prov_search_edt).getText().toString().trim())){
+                        pullAllProvidersByName(getEdt(R.id.prov_search_edt).getText().toString().trim());}
+
+                    else{
+                        pullAllProvidersByTypeStatus(retType(),retStat());
+                    }
+
+                }
+            });
+
         } catch (Exception e) {
             Toast.makeText(c, " Error as a result of " + e.getLocalizedMessage(),RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
         }
+
+
+
 
 
     }
@@ -114,15 +145,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    private void popProvList(){
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Chidi Umeh","Enugu Nigeria"));
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Ekene Mark","Lagos Nigeria"));
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Akpan Okon","Portharcourt Nigeria"));
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Bisola Ayorkun","Ogun Nigeria"));
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Yetunde Ivory","Ibadan Nigeria"));
-        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","Musa Hassan","Kano Nigeria"));
-        relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
-    }
+
 
     private FloatingActionButton getFab(int id){
         return findViewById(id);
@@ -160,9 +183,18 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                     if(selCrit.equals("Search By Provider Type")){
                         setProvType();
                     }
+                    else if(selCrit.equals("Search By Provider Type")){
+                        setProvType();
+                    }
+
                     else if(selCrit.equals("Search By OnBoarding Status")){
                         setOnBoardStatus();
                     }
+
+                    else if(selCrit.equals("Search By Name")){
+                        getEdt(R.id.prov_search_edt).setVisibility(View.VISIBLE);
+                    }
+
 
                     else{
                         Toast.makeText(c,"No valid selection made", RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
@@ -174,10 +206,16 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
-    private String retFilterType(){
-        return selCrit;
+    private String retType(){
+        return provTypeVal;
+    }
+
+    private String retStat(){
+        return onBoardStVal;
     }
 
 
@@ -255,7 +293,8 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
                 for(RelianceProZoneAppModelClass postObjectClass : postActivities){
 
-                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","","",0,"","","",""));
+                    relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass(new Object[]{},postObjectClass.getName(),postObjectClass.getAddress()));
+                        //relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass(postObjectClass.getId(),postObjectClass.getName(),postObjectClass.getDescription(),postObjectClass.getRating(),postObjectClass.getAddress(),postObjectClass.getActive_status(),postObjectClass.getProvider_type(),postObjectClass.getImages()));
                         relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
                 }
             }
@@ -269,11 +308,10 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
     }
 
 
-    private void pullAllProvidersByNameAddress(String name, String addr){
+    private void pullAllProvidersByName(String name){
         if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
             Map<String, String> genSearch = new HashMap<>();
             genSearch.put("name", name);
-            genSearch.put("address", addr);
             Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -291,7 +329,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                     ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
                     for (RelianceProZoneAppModelClass postObjectClass : postActivities) {
 
-                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("", "", "", 0, "", "", "", ""));
+                        relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass(postObjectClass.getId(),postObjectClass.getName(),postObjectClass.getDescription(),postObjectClass.getRating(),postObjectClass.getAddress(),postObjectClass.getActive_status(),(String)postObjectClass.getProvider_type(),postObjectClass.getImages()));
                         relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
                     }
                 }
@@ -329,7 +367,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
                 ArrayList<RelianceProZoneAppModelClass> postActivities = response.body();
                 for(RelianceProZoneAppModelClass postObjectClass : postActivities){
 
-                    relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass("","","",0,"","","",""));
+                    relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass(postObjectClass.getId(),postObjectClass.getName(),postObjectClass.getDescription(),postObjectClass.getRating(),postObjectClass.getAddress(),postObjectClass.getActive_status(),(String)postObjectClass.getProvider_type(),postObjectClass.getImages()));
                     relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
                 }
             }
@@ -346,7 +384,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
         }
     }
 
-    private void retrUpdData(String name, String descr, String status, String id, String prov_type, String addr, int rating){
+    private void retrUpdData(String name, String descr, String status, int id, String prov_type, String addr, int rating){
         relianceProZoneAppModelClassArrayList.add(new RelianceProZoneAppModelClass(id, name,  descr, rating, addr, status,  prov_type));
         relianceAppProZoneListProvidersAdapter.notifyDataSetChanged();
     }
@@ -358,6 +396,32 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
         edt.apply();
     }
 
+
+    public void pushUserValObj(String value,String key , int mode, String prefkey){
+        SharedPreferences shPref = getSharedPreferences(prefkey,mode);
+        SharedPreferences.Editor edt = shPref.edit();
+        edt.putString(key,value);
+        edt.apply();
+    }
+
+
+
+
+    public void pushUserValInt( int value,String key , int mode, String prefkey){
+        SharedPreferences shPref = getSharedPreferences(prefkey,mode);
+        SharedPreferences.Editor edt = shPref.edit();
+        edt.putInt(key,value);
+        edt.apply();
+    }
+
+    private Button getBut(int id){
+        return findViewById(id);
+    }
+
+
+private TextInputEditText getEdt(int id){
+        return findViewById(id);
+}
 
 
 

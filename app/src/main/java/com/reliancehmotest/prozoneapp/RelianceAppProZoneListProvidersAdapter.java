@@ -49,13 +49,12 @@ public class RelianceAppProZoneListProvidersAdapter extends RecyclerView.Adapter
             holder.prov_name.setText(RelianceAppProZoneConstants.EMPT_VAL);
         }
 
-        if (!TextUtils.isEmpty(relianceProZoneAppModelClass.getImages())){
+       /* if (!TextUtils.isEmpty(relianceProZoneAppModelClass.getImages())){
             Glide.with(v).load(relianceProZoneAppModelClass.getImages()).into(holder.prov_img);
-        }
+        }*/
 
-        else{
+
             holder.prov_img.setImageResource(R.mipmap.reliance_loggo_foreground);
-        }
 
     }
 

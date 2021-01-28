@@ -5,17 +5,25 @@ public class RelianceProZoneAppModelClass {
     public String prov_name;
     public String prov_loc;
     public String prov_id;*/
-    public String id;
+    public int id;
     public String name;
     public String description;
     public int rating;
     public String address;
     public String active_status;
-    public String provider_type;
-    public String images;
-    public String state;
+    public Object provider_type;
+    public Object images [];
+    public Object state;
 
-    public String getState() {
+    public Object[] getImages() {
+        return images;
+    }
+
+    public RelianceProZoneAppModelClass(Object[] images) {
+        this.images = images;
+    }
+
+    public Object getState() {
         return state;
     }
 
@@ -23,7 +31,7 @@ public class RelianceProZoneAppModelClass {
         this.state = state;
     }
 
-    public RelianceProZoneAppModelClass(String id, String name, String description, int rating, String address, String active_status, String provider_type, String images, String state) {
+    public RelianceProZoneAppModelClass(int id, String name, String description, int rating, String address, String active_status, String provider_type,  String state, Object[] images) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,24 +39,23 @@ public class RelianceProZoneAppModelClass {
         this.address = address;
         this.active_status = active_status;
         this.provider_type = provider_type;
-        this.images = images;
         this.state = state;
     }
 
     public RelianceProZoneAppModelClass() {
     }
 
-    public RelianceProZoneAppModelClass(  String images,String name,String address) {
+    public RelianceProZoneAppModelClass(  Object[] images,String name,String address) {
         this.name = name;
         this.address = address;
-        this.images = images;
+
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -92,7 +99,7 @@ public class RelianceProZoneAppModelClass {
         this.active_status = active_status;
     }
 
-    public String getProvider_type() {
+    public Object getProvider_type() {
         return provider_type;
     }
 
@@ -100,15 +107,9 @@ public class RelianceProZoneAppModelClass {
         this.provider_type = provider_type;
     }
 
-    public String getImages() {
-        return images;
-    }
 
-    public void setImages(String images) {
-        this.images = images;
-    }
 
-    public RelianceProZoneAppModelClass(String id, String name, String description, int rating, String address, String active_status, String provider_type, String images) {
+    public RelianceProZoneAppModelClass(int id, String name, String description, int rating, String address, String active_status, String provider_type, Object[] images) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -117,9 +118,10 @@ public class RelianceProZoneAppModelClass {
         this.active_status = active_status;
         this.provider_type = provider_type;
         this.images = images;
+
     }
 
-    public RelianceProZoneAppModelClass(String id, String name, String description, int rating, String address, String active_status, String provider_type) {
+    public RelianceProZoneAppModelClass(int id, String name, String description, int rating, String address, String active_status, String provider_type) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -129,11 +131,21 @@ public class RelianceProZoneAppModelClass {
         this.provider_type = provider_type;
     }
 
-    public RelianceProZoneAppModelClass(String images, String name, String address, String id) {
+    public RelianceProZoneAppModelClass(String images, String name, String address, int id) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.images = images;
+
+    }
+
+    public RelianceProZoneAppModelClass(String name, String description, int rating, String address, String active_status, String provider_type, String state) {
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.address = address;
+        this.active_status = active_status;
+        this.provider_type = provider_type;
+        this.state = state;
     }
 
     /*public RelianceProZoneAppModelClass(String img_prov, String prov_name, String prov_loc) {
