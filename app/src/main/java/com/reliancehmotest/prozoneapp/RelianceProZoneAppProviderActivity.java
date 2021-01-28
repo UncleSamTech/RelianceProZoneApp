@@ -54,14 +54,8 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reliance_pro_zone_app_provider);
         try {
-            int id = retrValInt("provid_pref_id",MODE_PRIVATE,"provid_pref_id_key");
-            String name = retrVal("provid_pref_name",MODE_PRIVATE,"provid_pref_name_key");
-            String description = retrVal("provid_pref_descr",MODE_PRIVATE,"provid_pref_descr_key");
-            int rating = retrValInt("provid_pref_rating",MODE_PRIVATE,"provid_pref_rating_key");
-            String address = retrVal("provid_pref_addr",MODE_PRIVATE,"provid_pref_descr_addr");
-            String active_status = retrVal("provid_pref_status",MODE_PRIVATE, "provid_pref_status_key");
-            String provider_type = retrVal("provid_pref_prov_type",MODE_PRIVATE,"provid_pref_prov_type_key");
-           // retrUpdData(name,description,active_status,id,provider_type,address,rating);
+
+            getEdt(R.id.prov_search_edt).setVisibility(View.GONE);
             connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             //the NetworkInfo class gets the current state of the device network connection
             networkInfo = connMgr.getActiveNetworkInfo();
@@ -276,6 +270,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
     }
 
     private void pullAllProviders(){
+        relianceProZoneAppModelClassArrayList.clear();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -309,6 +304,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
 
 
     private void pullAllProvidersByName(String name){
+        relianceProZoneAppModelClassArrayList.clear();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
             Map<String, String> genSearch = new HashMap<>();
             genSearch.put("name", name);
@@ -349,6 +345,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
 
 
     private void pullAllProvidersByTypeStatus(String type, String stat){
+        relianceProZoneAppModelClassArrayList.clear();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

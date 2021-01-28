@@ -48,7 +48,7 @@ public class RelianceAddProviderImage extends AppCompatActivity {
         getBut(R.id.btn_upload_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addImages("provider",getTInp(R.id.tinp_prov_id).getText().toString().trim(),"",new Array[]{});
+                addImages("provider",getTInp(R.id.tinp_prov_id).getText().toString().trim(),getImgPath(),new Array[]{});
             }
         });
 
@@ -83,7 +83,7 @@ public class RelianceAddProviderImage extends AppCompatActivity {
             try {
                 imgUri = data.getData();
                 imgPath = data.getDataString();
-                Glide.with(c).load(imgUri).into(getImg(R.id.img_edt_user_prof));
+                Glide.with(c).load(imgUri).into(getImg(R.id.img_prov_pics));
             } catch (NullPointerException np) {
                 Toast.makeText(c, "Error as a result of : " + np.getLocalizedMessage(), RelianceAppProZoneConstants.TOAST_LONG_LENGTH).show();
             }
@@ -95,6 +95,11 @@ public class RelianceAddProviderImage extends AppCompatActivity {
     public Uri getImgUri(){
         Uri uri = imgUri;
         return uri;}
+
+
+        private String getImgPath(){
+        return imgPath;
+        }
 
         private void addImages(String ref,
                 String refId,

@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lin_spin"
+        android:layout_margin="8dp"
         app:layout_constraintStart_toStartOf="@id/cons_disp_prov"
         app:layout_constraintEnd_toEndOf="@id/cons_disp_prov"
         app:layout_constraintTop_toTopOf="@id/cons_disp_prov"
@@ -44,7 +45,7 @@
             android:layout_height="match_parent"
             android:text="@string/query_lab"
             android:layout_weight="2"
-            android:padding="2dp"
+            android:padding="8dp"
             android:layout_margin="4dp"
             android:id="@+id/btn_search"
             android:background="@drawable/button_back_color"
@@ -59,7 +60,7 @@
         android:layout_width="match_parent"
         android:fontFamily="@font/fauna_one"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         android:drawableStart="@drawable/ic_search_ico"
         android:drawablePadding="4dp"
         android:hint="@string/enter_search_text"
@@ -84,8 +85,8 @@
         android:layout_marginEnd="16dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginTop="32dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="32dp"
         android:src="@drawable/ic_prov_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -98,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginTop="16dp"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_add_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
