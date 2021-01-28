@@ -304,7 +304,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
 
 
     private void pullAllProvidersByName(String name){
-        relianceProZoneAppModelClassArrayList.clear();
+        //relianceProZoneAppModelClassArrayList.clear();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
             Map<String, String> genSearch = new HashMap<>();
             genSearch.put("name", name);
@@ -345,7 +345,7 @@ public class RelianceProZoneAppProviderActivity extends AppCompatActivity {
 
 
     private void pullAllProvidersByTypeStatus(String type, String stat){
-        relianceProZoneAppModelClassArrayList.clear();
+        //relianceProZoneAppModelClassArrayList.clear();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isConnected()) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(RelianceAppProZoneConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

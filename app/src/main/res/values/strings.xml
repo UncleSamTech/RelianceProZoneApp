@@ -19,6 +19,6 @@
     <string name="select_provider_status">Select Provider Status</string>
     <string name="select_provider_type_lab">Select Provider Type</string>
     <string name="add_provider_id_lab">Add Provider Id</string>
-    <string name="query_lab">Query</string>
+    <string name="query_lab">Search Value</string>
     <string name="enter_search_text">Enter Search Text</string>
 </resources>
